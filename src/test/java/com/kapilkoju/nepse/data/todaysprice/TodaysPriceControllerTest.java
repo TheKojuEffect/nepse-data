@@ -1,4 +1,4 @@
-package com.kapilkoju.nepse.data;
+package com.kapilkoju.nepse.data.todaysprice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(NepseDataApi.class)
-public class NepseDataApiTest {
+@WebMvcTest(TodaysPriceController.class)
+public class TodaysPriceControllerTest {
 
     @Autowired
     private MockMvc mvc;

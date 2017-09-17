@@ -1,21 +1,20 @@
-package com.kapilkoju.nepse.data;
+package com.kapilkoju.nepse.data.todaysprice;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/data")
-public class NepseDataApi {
+public class TodaysPriceController {
 
     private final TodaysPriceService todaysPriceService;
 
-    public NepseDataApi(TodaysPriceService todaysPriceService) {
+    public TodaysPriceController(TodaysPriceService todaysPriceService) {
         this.todaysPriceService = todaysPriceService;
     }
 
-    @RequestMapping("/todaysprice")
+    @GetMapping("/data/todaysprice")
     public List<TodaysPrice> getTodaysPrice() {
         return todaysPriceService.getTodaysPrices();
     }

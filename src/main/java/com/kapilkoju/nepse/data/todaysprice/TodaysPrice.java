@@ -1,4 +1,4 @@
-package com.kapilkoju.nepse.data;
+package com.kapilkoju.nepse.data.todaysprice;
 
 import lombok.Builder;
 import lombok.Value;
