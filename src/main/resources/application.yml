@@ -1,0 +1,3 @@
+nepse:
+  todaysprice:
+    url: http://www.nepalstock.com/todaysprice/export

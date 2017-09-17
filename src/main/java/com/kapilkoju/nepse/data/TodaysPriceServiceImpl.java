@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,15 +18,17 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class TodaysPriceServiceImpl implements TodaysPriceService {
 
+    private final String todaysPriceUrl;
     private final RestTemplate restTemplate;
 
-    public TodaysPriceServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public TodaysPriceServiceImpl(@Value("${nepse.todaysprice.url}") String todaysPriceUrl, RestTemplateBuilder restTemplateBuilder) {
+        this.todaysPriceUrl = todaysPriceUrl;
         restTemplate = restTemplateBuilder.build();
     }
 
     @Override
     public List<TodaysPrice> getTodaysPrices() {
-        final String pricesTableHtml = restTemplate.getForObject("http://www.nepalstock.com/todaysprice/export", String.class);
+        final String pricesTableHtml = restTemplate.getForObject(todaysPriceUrl, String.class);
 
         final Document pricesTable = Jsoup.parse(pricesTableHtml);
 

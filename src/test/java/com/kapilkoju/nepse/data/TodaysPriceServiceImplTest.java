@@ -31,9 +31,12 @@ public class TodaysPriceServiceImplTest {
     @Value("classpath:data/todaysprice-2017-09-17.xls")
     private Resource todaysPriceXls;
 
+    @Value("${nepse.todaysprice.url}")
+    private String todaysPriceUrl;
+
     @Test
     public void getTodaysPricesShouldReturnListOfTodaysPrices() throws IOException {
-        server.expect(requestTo("http://www.nepalstock.com/todaysprice/export"))
+        server.expect(requestTo(todaysPriceUrl))
                 .andRespond(withSuccess(todaysPriceXls, MediaType.valueOf("application/vnd.ms-excel")));
 
         final List<TodaysPrice> prices = todaysPriceService.getTodaysPrices();
