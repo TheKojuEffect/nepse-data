@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    runtime('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
+    compile 'org.jsoup:jsoup:1.10.3'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
