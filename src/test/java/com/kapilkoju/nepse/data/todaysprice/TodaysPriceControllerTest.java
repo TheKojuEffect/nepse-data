@@ -31,7 +31,7 @@ public class TodaysPriceControllerTest {
 
     @Test
     public void getTodaysPriceShouldReturnTodaysPricesJson() throws Exception {
-        given(todaysPriceService.getTodaysPrices())
+        given(todaysPriceService.getTodaysPrice())
                 .willReturn(getSampleTodaysPrices());
 
         mvc.perform(get("/data/todaysprice"))

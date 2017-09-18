@@ -27,7 +27,7 @@ public class TodaysPriceServiceImpl implements TodaysPriceService {
     }
 
     @Override
-    public List<TodaysPrice> getTodaysPrices() {
+    public List<TodaysPrice> getTodaysPrice() {
         final String pricesTableHtml = restTemplate.getForObject(todaysPriceUrl, String.class);
 
         final Document pricesTable = Jsoup.parse(pricesTableHtml);

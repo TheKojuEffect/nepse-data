@@ -28,18 +28,18 @@ public class TodaysPriceServiceImplTest {
     @Autowired
     private MockRestServiceServer server;
 
-    @Value("classpath:data/todaysprice-2017-09-17.xls")
-    private Resource todaysPriceXls;
-
     @Value("${nepse.todaysprice.url}")
     private String todaysPriceUrl;
+
+    @Value("classpath:data/todaysprice-2017-09-17.xls")
+    private Resource todaysPriceXls;
 
     @Test
     public void getTodaysPricesShouldReturnListOfTodaysPrices() throws IOException {
         server.expect(requestTo(todaysPriceUrl))
                 .andRespond(withSuccess(todaysPriceXls, MediaType.valueOf("application/vnd.ms-excel")));
 
-        final List<TodaysPrice> prices = todaysPriceService.getTodaysPrices();
+        final List<TodaysPrice> prices = todaysPriceService.getTodaysPrice();
         assertThat(prices)
                 .hasSize(159)
                 .contains(
