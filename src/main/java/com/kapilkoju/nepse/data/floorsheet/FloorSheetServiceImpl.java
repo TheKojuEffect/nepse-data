@@ -47,7 +47,7 @@ public class FloorSheetServiceImpl implements FloorSheetService {
                     .build();
         };
 
-        return sheetTrs.stream()
+        return sheetTrs.parallelStream()
                 .map(floorSheetExtractor)
                 .collect(toList());
     }

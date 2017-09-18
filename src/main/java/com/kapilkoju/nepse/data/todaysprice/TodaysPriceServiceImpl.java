@@ -49,7 +49,7 @@ public class TodaysPriceServiceImpl implements TodaysPriceService {
                     .build();
         };
 
-        return priceTrs.stream()
+        return priceTrs.parallelStream()
                 .map(todaysPriceExtractor)
                 .collect(toList());
     }
