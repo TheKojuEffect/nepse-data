@@ -39,11 +39,11 @@ public class FloorSheetServiceImplTest {
         server.expect(requestTo(floorSheetUrl))
                 .andRespond(withSuccess(floorSheetHtml, MediaType.TEXT_HTML));
 
-        final List<FloorSheet> prices = floorSheetService.getFloorSheet();
+        final List<FloorSheetEntry> prices = floorSheetService.getFloorSheet();
         assertThat(prices)
                 .hasSize(50)
                 .contains(
-                        FloorSheet.builder()
+                        FloorSheetEntry.builder()
                                 .contractNo(201709175342179L)
                                 .stockSymbol("PRVU")
                                 .buyerBroker(45)
@@ -53,7 +53,7 @@ public class FloorSheetServiceImplTest {
                                 .amount(new BigDecimal("18800.00"))
                                 .build(),
 
-                        FloorSheet.builder()
+                        FloorSheetEntry.builder()
                                 .contractNo(201709175342182L)
                                 .stockSymbol("NGPL")
                                 .buyerBroker(29)
@@ -63,7 +63,7 @@ public class FloorSheetServiceImplTest {
                                 .amount(new BigDecimal("2370.00"))
                                 .build(),
 
-                        FloorSheet.builder()
+                        FloorSheetEntry.builder()
                                 .contractNo(201709175342221L)
                                 .stockSymbol("NBBL")
                                 .buyerBroker(58)
@@ -73,7 +73,7 @@ public class FloorSheetServiceImplTest {
                                 .amount(new BigDecimal("38200.00"))
                                 .build(),
 
-                        FloorSheet.builder()
+                        FloorSheetEntry.builder()
                                 .contractNo(201709175342228L)
                                 .stockSymbol("LBL")
                                 .buyerBroker(47)

@@ -15,7 +15,7 @@ public class TodaysPriceController {
     }
 
     @GetMapping("/data/todaysprice")
-    public List<TodaysPrice> getTodaysPrice() {
+    public List<TodaysPriceEntry> getTodaysPrice() {
         return todaysPriceService.getTodaysPrice();
     }
 }

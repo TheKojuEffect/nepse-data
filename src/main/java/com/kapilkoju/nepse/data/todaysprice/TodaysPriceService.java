@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface TodaysPriceService {
 
-    List<TodaysPrice> getTodaysPrice();
+    List<TodaysPriceEntry> getTodaysPrice();
 }

@@ -56,9 +56,9 @@ public class TodaysPriceControllerTest {
                 .andExpect(jsonPath("$[1].previousClosing", is(144.00)));
     }
 
-    private static List<TodaysPrice> getSampleTodaysPrices() {
+    private static List<TodaysPriceEntry> getSampleTodaysPrices() {
         return Arrays.asList(
-                TodaysPrice.builder()
+                TodaysPriceEntry.builder()
                         .companyName("Khanikhola Hydropower Co. Ltd.")
                         .noOfTransactions(14)
                         .maxPrice(new BigDecimal("154.00"))
@@ -70,7 +70,7 @@ public class TodaysPriceControllerTest {
                         .difference(new BigDecimal("-3.00"))
                         .build(),
 
-                TodaysPrice.builder()
+                TodaysPriceEntry.builder()
                         .companyName("World Merchant Banking & Finance Ltd.")
                         .noOfTransactions(13)
                         .maxPrice(new BigDecimal("144.00"))

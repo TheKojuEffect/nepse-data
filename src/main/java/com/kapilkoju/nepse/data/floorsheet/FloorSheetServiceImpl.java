@@ -27,16 +27,16 @@ public class FloorSheetServiceImpl implements FloorSheetService {
     }
 
     @Override
-    public List<FloorSheet> getFloorSheet() {
+    public List<FloorSheetEntry> getFloorSheet() {
         final String floorSheetHtml = restTemplate.getForObject(floorSheetUrl, String.class);
 
         final Document floorSheetTable = Jsoup.parse(floorSheetHtml);
 
         final Elements sheetTrs = floorSheetTable.select("table.my-table tbody tr:nth-child(n+3):nth-last-child(n+4)");
 
-        final Function<Element, FloorSheet> floorSheetExtractor = tr -> {
+        final Function<Element, FloorSheetEntry> floorSheetExtractor = tr -> {
             final Elements tds = tr.select("td");
-            return FloorSheet.builder()
+            return FloorSheetEntry.builder()
                     .contractNo(Long.valueOf(tds.get(1).text()))
                     .stockSymbol(tds.get(2).text())
                     .buyerBroker(Integer.valueOf(tds.get(3).text()))

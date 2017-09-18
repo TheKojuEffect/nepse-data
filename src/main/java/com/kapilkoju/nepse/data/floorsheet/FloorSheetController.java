@@ -15,7 +15,7 @@ public class FloorSheetController {
     }
 
     @GetMapping("/data/floorsheet")
-    public List<FloorSheet> getFloorSheet() {
+    public List<FloorSheetEntry> getFloorSheet() {
         return floorSheetService.getFloorSheet();
     }
 }

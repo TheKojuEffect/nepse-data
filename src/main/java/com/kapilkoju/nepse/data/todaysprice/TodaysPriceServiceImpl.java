@@ -27,16 +27,16 @@ public class TodaysPriceServiceImpl implements TodaysPriceService {
     }
 
     @Override
-    public List<TodaysPrice> getTodaysPrice() {
+    public List<TodaysPriceEntry> getTodaysPrice() {
         final String pricesTableHtml = restTemplate.getForObject(todaysPriceUrl, String.class);
 
         final Document pricesTable = Jsoup.parse(pricesTableHtml);
 
         final Elements priceTrs = pricesTable.select("table tr:gt(0)");
 
-        final Function<Element, TodaysPrice> todaysPriceExtractor = priceTr -> {
+        final Function<Element, TodaysPriceEntry> todaysPriceExtractor = priceTr -> {
             final Elements tds = priceTr.select("td");
-            return TodaysPrice.builder()
+            return TodaysPriceEntry.builder()
                     .companyName(tds.get(0).text())
                     .noOfTransactions(Integer.valueOf(tds.get(1).text()))
                     .maxPrice(new BigDecimal(tds.get(2).text()))

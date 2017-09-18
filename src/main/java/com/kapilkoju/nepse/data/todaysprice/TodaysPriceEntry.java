@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Value
 @Builder
-class TodaysPrice {
+class TodaysPriceEntry {
     private String companyName;
     private Integer noOfTransactions;
     private BigDecimal maxPrice;

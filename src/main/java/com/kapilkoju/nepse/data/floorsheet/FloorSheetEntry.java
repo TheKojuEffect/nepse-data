@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Value
 @Builder
-class FloorSheet {
+class FloorSheetEntry {
     private Long contractNo;
     private String stockSymbol;
     private Integer buyerBroker;

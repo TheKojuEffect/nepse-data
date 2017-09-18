@@ -56,9 +56,9 @@ public class FloorSheetControllerTest {
                 .andExpect(jsonPath("$[1].amount", is(38200.0)));
     }
 
-    private static List<FloorSheet> getSampleFloorSheets() {
+    private static List<FloorSheetEntry> getSampleFloorSheets() {
         return Arrays.asList(
-                FloorSheet.builder()
+                FloorSheetEntry.builder()
                         .contractNo(201709175342182L)
                         .stockSymbol("NGPL")
                         .buyerBroker(29)
@@ -68,7 +68,7 @@ public class FloorSheetControllerTest {
                         .amount(new BigDecimal("2370.00"))
                         .build(),
 
-                FloorSheet.builder()
+                FloorSheetEntry.builder()
                         .contractNo(201709175342221L)
                         .stockSymbol("NBBL")
                         .buyerBroker(58)

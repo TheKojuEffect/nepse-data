@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface FloorSheetService {
 
-    List<FloorSheet> getFloorSheet();
+    List<FloorSheetEntry> getFloorSheet();
 }

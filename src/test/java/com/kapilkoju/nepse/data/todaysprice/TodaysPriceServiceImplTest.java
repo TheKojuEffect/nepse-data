@@ -39,11 +39,11 @@ public class TodaysPriceServiceImplTest {
         server.expect(requestTo(todaysPriceUrl))
                 .andRespond(withSuccess(todaysPriceXls, MediaType.valueOf("application/vnd.ms-excel")));
 
-        final List<TodaysPrice> prices = todaysPriceService.getTodaysPrice();
+        final List<TodaysPriceEntry> prices = todaysPriceService.getTodaysPrice();
         assertThat(prices)
                 .hasSize(159)
                 .contains(
-                        TodaysPrice.builder()
+                        TodaysPriceEntry.builder()
                                 .companyName("Agriculture Development Bank Limited")
                                 .noOfTransactions(159)
                                 .maxPrice(new BigDecimal("459.00"))
@@ -55,7 +55,7 @@ public class TodaysPriceServiceImplTest {
                                 .difference(new BigDecimal("0.00"))
                                 .build(),
 
-                        TodaysPrice.builder()
+                        TodaysPriceEntry.builder()
                                 .companyName("Everest Insurance Co. Ltd.")
                                 .noOfTransactions(34)
                                 .maxPrice(new BigDecimal("2698.00"))
@@ -67,7 +67,7 @@ public class TodaysPriceServiceImplTest {
                                 .difference(new BigDecimal("35.00"))
                                 .build(),
 
-                        TodaysPrice.builder()
+                        TodaysPriceEntry.builder()
                                 .companyName("Khanikhola Hydropower Co. Ltd.")
                                 .noOfTransactions(13)
                                 .maxPrice(new BigDecimal("154.00"))
@@ -79,7 +79,7 @@ public class TodaysPriceServiceImplTest {
                                 .difference(new BigDecimal("-3.00"))
                                 .build(),
 
-                        TodaysPrice.builder()
+                        TodaysPriceEntry.builder()
                                 .companyName("World Merchant Banking & Finance Ltd.")
                                 .noOfTransactions(13)
                                 .maxPrice(new BigDecimal("144.00"))
