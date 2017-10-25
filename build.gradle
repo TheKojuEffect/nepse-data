@@ -1,11 +1,13 @@
+import static org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
+
 buildscript {
     ext {
-		springBootVersion = '2.0.0.M5'
+        springBootVersion = '2.0.0.M5'
     }
     repositories {
         mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -18,19 +20,22 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'com.kapilkoju'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.9
 
 repositories {
     mavenCentral()
-	maven { url "https://repo.spring.io/snapshot" }
-	maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-webflux')
+    compile('org.springframework.boot:spring-boot-starter-webflux')
     compile 'org.jsoup:jsoup:1.10.3'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('io.projectreactor:reactor-test')
+    testCompile('io.projectreactor:reactor-test')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2.1'
+    distributionType = ALL
 }
