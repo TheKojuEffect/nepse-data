@@ -1,8 +1,8 @@
 package com.kapilkoju.nepse.data.todaysprice;
 
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface TodaysPriceService {
 
-    List<TodaysPriceEntry> getTodaysPrice();
+    Flux<TodaysPriceEntry> getTodaysPrice();
 }

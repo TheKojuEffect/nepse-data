@@ -15,7 +15,6 @@ public class FloorSheetController {
 
     @GetMapping("/data/floorsheet")
     public Flux<FloorSheetEntry> getFloorSheet() {
-        // TODO: Make non-blocking
-        return Flux.fromIterable(floorSheetService.getFloorSheet());
+        return floorSheetService.getFloorSheet();
     }
 }

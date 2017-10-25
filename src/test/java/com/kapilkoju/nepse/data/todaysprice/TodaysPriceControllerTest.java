@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpec;
+import reactor.core.publisher.Flux;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class TodaysPriceControllerTest {
     @Test
     public void getTodaysPriceShouldReturnTodaysPricesJson() throws Exception {
         given(todaysPriceService.getTodaysPrice())
-            .willReturn(getSampleTodaysPrices());
+            .willReturn(Flux.fromIterable(getSampleTodaysPrices()));
 
         final BodyContentSpec body = webClient.get().uri("/data/todaysprice").accept(MediaType.APPLICATION_JSON)
             .exchange()

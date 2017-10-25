@@ -15,7 +15,6 @@ public class TodaysPriceController {
 
     @GetMapping("/data/todaysprice")
     public Flux<TodaysPriceEntry> getTodaysPrice() {
-        // TODO: Make non-blocking
-        return Flux.fromIterable(todaysPriceService.getTodaysPrice());
+        return todaysPriceService.getTodaysPrice();
     }
 }

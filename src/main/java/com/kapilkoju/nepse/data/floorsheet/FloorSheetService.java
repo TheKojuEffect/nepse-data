@@ -1,8 +1,8 @@
 package com.kapilkoju.nepse.data.floorsheet;
 
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface FloorSheetService {
 
-    List<FloorSheetEntry> getFloorSheet();
+    Flux<FloorSheetEntry> getFloorSheet();
 }
