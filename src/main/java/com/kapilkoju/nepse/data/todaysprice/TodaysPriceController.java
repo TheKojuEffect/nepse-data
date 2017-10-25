@@ -2,8 +2,7 @@ package com.kapilkoju.nepse.data.todaysprice;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @RestController
 public class TodaysPriceController {
@@ -15,7 +14,8 @@ public class TodaysPriceController {
     }
 
     @GetMapping("/data/todaysprice")
-    public List<TodaysPriceEntry> getTodaysPrice() {
-        return todaysPriceService.getTodaysPrice();
+    public Flux<TodaysPriceEntry> getTodaysPrice() {
+        // TODO: Make non-blocking
+        return Flux.fromIterable(todaysPriceService.getTodaysPrice());
     }
 }

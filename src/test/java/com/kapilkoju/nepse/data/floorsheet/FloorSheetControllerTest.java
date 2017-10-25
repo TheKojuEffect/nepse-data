@@ -1,59 +1,58 @@
 package com.kapilkoju.nepse.data.floorsheet;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpec;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(FloorSheetController.class)
+@WebFluxTest(FloorSheetController.class)
 public class FloorSheetControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    private WebTestClient webClient;
 
     @MockBean
     private FloorSheetService floorSheetService;
 
-    @Ignore
     @Test
     public void getFloorSheetShouldReturnFloorSheetJson() throws Exception {
         given(floorSheetService.getFloorSheet())
                 .willReturn(getSampleFloorSheets());
 
-        mvc.perform(get("/data/floorSheet"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].contractNo", is(201709175342182L)))
-                .andExpect(jsonPath("$[0].stockSymbol", is("NGPL")))
-                .andExpect(jsonPath("$[0].buyerBroker", is(29)))
-                .andExpect(jsonPath("$[0].sellerBroker", is(1)))
-                .andExpect(jsonPath("$[0].quantity", is(10)))
-                .andExpect(jsonPath("$[0].rate", is(237.0)))
-                .andExpect(jsonPath("$[0].amount", is(2370.0)))
+        final BodyContentSpec body = webClient.get().uri("/data/floorsheet").accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody();
 
-                .andExpect(jsonPath("$[1].contractNo", is(201709175342221L)))
-                .andExpect(jsonPath("$[1].stockSymbol", is("NBBL")))
-                .andExpect(jsonPath("$[1].buyerBroker", is(58)))
-                .andExpect(jsonPath("$[1].sellerBroker", is(18)))
-                .andExpect(jsonPath("$[1].quantity", is(10)))
-                .andExpect(jsonPath("$[1].rate", is(3820.0)))
-                .andExpect(jsonPath("$[1].amount", is(38200.0)));
+        body.jsonPath("$", hasSize(2));
+        body.jsonPath("$[0].contractNo", is(201709175342182L));
+        body.jsonPath("$[0].stockSymbol", is("NGPL"));
+        body.jsonPath("$[0].buyerBroker", is(29));
+        body.jsonPath("$[0].sellerBroker", is(1));
+        body.jsonPath("$[0].quantity", is(10));
+        body.jsonPath("$[0].rate", is(237.0));
+        body.jsonPath("$[0].amount", is(2370.0));
+        body.jsonPath("$[1].contractNo", is(201709175342221L));
+        body.jsonPath("$[1].stockSymbol", is("NBBL"));
+        body.jsonPath("$[1].buyerBroker", is(58));
+        body.jsonPath("$[1].sellerBroker", is(18));
+        body.jsonPath("$[1].quantity", is(10));
+        body.jsonPath("$[1].rate", is(3820.0));
+        body.jsonPath("$[1].amount", is(38200.0));
     }
 
     private static List<FloorSheetEntry> getSampleFloorSheets() {
@@ -79,5 +78,4 @@ public class FloorSheetControllerTest {
                         .build()
         );
     }
-
 }

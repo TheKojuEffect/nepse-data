@@ -2,8 +2,7 @@ package com.kapilkoju.nepse.data.floorsheet;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @RestController
 public class FloorSheetController {
@@ -15,7 +14,8 @@ public class FloorSheetController {
     }
 
     @GetMapping("/data/floorsheet")
-    public List<FloorSheetEntry> getFloorSheet() {
-        return floorSheetService.getFloorSheet();
+    public Flux<FloorSheetEntry> getFloorSheet() {
+        // TODO: Make non-blocking
+        return Flux.fromIterable(floorSheetService.getFloorSheet());
     }
 }
