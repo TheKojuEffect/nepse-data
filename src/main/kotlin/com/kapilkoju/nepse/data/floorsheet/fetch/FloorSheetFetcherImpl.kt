@@ -1,19 +1,21 @@
-package com.kapilkoju.nepse.data.floorsheet
+package com.kapilkoju.nepse.data.floorsheet.fetch
 
+import com.kapilkoju.nepse.data.floorsheet.model.FloorSheetEntry
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
+import java.lang.Long
 import java.math.BigDecimal
 import java.util.stream.Collectors.toList
 
 @Service
-class FloorSheetServiceImpl(
+class FloorSheetFetcherImpl(
         @param:Value("\${nepse.floorsheet.url}") private val floorSheetUrl: String,
         restTemplateBuilder: RestTemplateBuilder)
-    : FloorSheetService {
+    : FloorSheetFetcher {
 
     private val restTemplate: RestTemplate = restTemplateBuilder.build()
 
@@ -27,7 +29,7 @@ class FloorSheetServiceImpl(
         val floorSheetExtractor = { tr: Element ->
             val tds = tr.select("td")
             FloorSheetEntry(
-                    contractNo = java.lang.Long.valueOf(tds[1].text()),
+                    contractNo = Long.valueOf(tds[1].text()),
                     stockSymbol = tds[2].text(),
                     buyerBroker = Integer.valueOf(tds[3].text()),
                     sellerBroker = Integer.valueOf(tds[4].text()),

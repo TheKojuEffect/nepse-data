@@ -1,5 +1,7 @@
-package com.kapilkoju.nepse.data.todaysprice
+package com.kapilkoju.nepse.data.todaysprice.api
 
+import com.kapilkoju.nepse.data.todaysprice.fetch.TodaysPriceFetcher
+import com.kapilkoju.nepse.data.todaysprice.model.TodaysPriceEntry
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matchers.hasSize
 import org.junit.Test
@@ -24,7 +26,7 @@ class TodaysPriceControllerTest {
     private lateinit var mvc: MockMvc
 
     @MockBean
-    private lateinit var todaysPriceService: TodaysPriceService
+    private lateinit var todaysPriceFetcher: TodaysPriceFetcher
 
     private val sampleTodaysPrices: List<TodaysPriceEntry> = Arrays.asList(
             TodaysPriceEntry(
@@ -52,7 +54,7 @@ class TodaysPriceControllerTest {
 
     @Test
     fun getTodaysPriceShouldReturnTodaysPricesJson() {
-        given(todaysPriceService.getTodaysPrice())
+        given(todaysPriceFetcher.getTodaysPrice())
                 .willReturn(sampleTodaysPrices)
 
         mvc.perform(get("/data/todaysprice"))

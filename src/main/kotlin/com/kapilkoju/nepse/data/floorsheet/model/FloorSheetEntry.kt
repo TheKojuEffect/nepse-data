@@ -1,4 +1,4 @@
-package com.kapilkoju.nepse.data.floorsheet
+package com.kapilkoju.nepse.data.floorsheet.model
 
 import java.math.BigDecimal
 

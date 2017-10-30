@@ -1,5 +1,7 @@
-package com.kapilkoju.nepse.data.floorsheet
+package com.kapilkoju.nepse.data.floorsheet.api
 
+import com.kapilkoju.nepse.data.floorsheet.fetch.FloorSheetFetcher
+import com.kapilkoju.nepse.data.floorsheet.model.FloorSheetEntry
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matchers.hasSize
 import org.junit.Test
@@ -24,7 +26,7 @@ class FloorSheetControllerTest {
     private lateinit var mvc: MockMvc
 
     @MockBean
-    private lateinit var floorSheetService: FloorSheetService
+    private lateinit var floorSheetFetcher: FloorSheetFetcher
 
     private val sampleFloorSheets: List<FloorSheetEntry> = Arrays.asList(
             FloorSheetEntry(
@@ -48,7 +50,7 @@ class FloorSheetControllerTest {
 
     @Test
     fun getFloorSheetShouldReturnFloorSheetJson() {
-        given(floorSheetService.getFloorSheet())
+        given(floorSheetFetcher.getFloorSheet())
                 .willReturn(sampleFloorSheets)
 
         mvc.perform(get("/data/floorsheet"))

@@ -1,4 +1,4 @@
-package com.kapilkoju.nepse.data.todaysprice
+package com.kapilkoju.nepse.data.todaysprice.model
 
 import java.math.BigDecimal
 

@@ -1,5 +1,6 @@
-package com.kapilkoju.nepse.data.todaysprice
+package com.kapilkoju.nepse.data.todaysprice.fetch
 
+import com.kapilkoju.nepse.data.todaysprice.model.TodaysPriceEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,11 +16,11 @@ import org.springframework.test.web.client.response.MockRestResponseCreators.wit
 import java.math.BigDecimal
 
 @RunWith(SpringRunner::class)
-@RestClientTest(TodaysPriceServiceImpl::class)
-class TodaysPriceServiceImplTest {
+@RestClientTest(TodaysPriceFetcherImpl::class)
+class TodaysPriceFetcherImplTest {
 
     @Autowired
-    private lateinit var todaysPriceService: TodaysPriceService
+    private lateinit var todaysPriceFetcher: TodaysPriceFetcher
 
     @Autowired
     private lateinit var server: MockRestServiceServer
@@ -35,7 +36,7 @@ class TodaysPriceServiceImplTest {
         server.expect(requestTo(todaysPriceUrl))
                 .andRespond(withSuccess(todaysPriceXls, MediaType.valueOf("application/vnd.ms-excel")))
 
-        val prices = todaysPriceService.getTodaysPrice()
+        val prices = todaysPriceFetcher.getTodaysPrice()
         assertThat(prices)
                 .hasSize(159)
                 .contains(

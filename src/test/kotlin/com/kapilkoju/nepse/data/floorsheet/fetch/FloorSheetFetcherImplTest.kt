@@ -1,5 +1,6 @@
-package com.kapilkoju.nepse.data.floorsheet
+package com.kapilkoju.nepse.data.floorsheet.fetch
 
+import com.kapilkoju.nepse.data.floorsheet.model.FloorSheetEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,11 +16,11 @@ import org.springframework.test.web.client.response.MockRestResponseCreators.wit
 import java.math.BigDecimal
 
 @RunWith(SpringRunner::class)
-@RestClientTest(FloorSheetServiceImpl::class)
-class FloorSheetServiceImplTest {
+@RestClientTest(FloorSheetFetcherImpl::class)
+class FloorSheetFetcherImplTest {
 
     @Autowired
-    private lateinit var floorSheetService: FloorSheetService
+    private lateinit var floorSheetFetcher: FloorSheetFetcher
 
     @Autowired
     private lateinit var server: MockRestServiceServer
@@ -35,7 +36,7 @@ class FloorSheetServiceImplTest {
         server.expect(requestTo(floorSheetUrl))
                 .andRespond(withSuccess(floorSheetHtml, MediaType.TEXT_HTML))
 
-        val prices = floorSheetService.getFloorSheet()
+        val prices = floorSheetFetcher.getFloorSheet()
         assertThat(prices)
                 .hasSize(50)
                 .contains(

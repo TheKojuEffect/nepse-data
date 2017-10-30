@@ -1,5 +1,6 @@
-package com.kapilkoju.nepse.data.todaysprice
+package com.kapilkoju.nepse.data.todaysprice.fetch
 
+import com.kapilkoju.nepse.data.todaysprice.model.TodaysPriceEntry
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.beans.factory.annotation.Value
@@ -10,10 +11,10 @@ import java.math.BigDecimal
 import java.util.stream.Collectors.toList
 
 @Service
-class TodaysPriceServiceImpl(
+class TodaysPriceFetcherImpl(
         @param:Value("\${nepse.todaysprice.url}") private val todaysPriceUrl: String,
         restTemplateBuilder: RestTemplateBuilder)
-    : TodaysPriceService {
+    : TodaysPriceFetcher {
 
     private val restTemplate: RestTemplate = restTemplateBuilder.build()
 

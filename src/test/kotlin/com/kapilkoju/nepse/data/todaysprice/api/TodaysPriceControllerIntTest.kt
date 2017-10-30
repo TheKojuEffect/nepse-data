@@ -1,4 +1,4 @@
-package com.kapilkoju.nepse.data.todaysprice
+package com.kapilkoju.nepse.data.todaysprice.api
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
