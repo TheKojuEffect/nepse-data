@@ -37,7 +37,7 @@ class TodaysPriceDumper(private val jobBuilderFactory: JobBuilderFactory,
     fun dumpTodaysPriceTasklet(): Tasklet {
         return Tasklet { _, _ ->
             val prices = todaysPriceFetcher.getTodaysPrices()
-            todaysPriceRepo.saveAll(prices)
+            todaysPriceRepo.save(prices)
             RepeatStatus.FINISHED
         }
     }
