@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
-import java.lang.Long
 import java.math.BigDecimal
 import java.util.stream.Collectors.toList
 
@@ -29,7 +28,7 @@ class FloorSheetFetcherImpl(
         val floorSheetExtractor = { tr: Element ->
             val tds = tr.select("td")
             FloorSheetEntry(
-                    contractNo = Long.valueOf(tds[1].text()),
+                    contractNo = tds[1].text().toLong(),
                     stockSymbol = tds[2].text(),
                     buyerBroker = Integer.valueOf(tds[3].text()),
                     sellerBroker = Integer.valueOf(tds[4].text()),

@@ -1,7 +1,7 @@
 package com.kapilkoju.nepse.data.todaysprice.api
 
 import com.kapilkoju.nepse.data.todaysprice.fetch.TodaysPriceFetcher
-import com.kapilkoju.nepse.data.todaysprice.model.TodaysPriceEntry
+import com.kapilkoju.nepse.data.todaysprice.model.TodaysPrice
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matchers.hasSize
 import org.junit.Test
@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.math.BigDecimal
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 @RunWith(SpringRunner::class)
@@ -28,8 +30,9 @@ class TodaysPriceControllerTest {
     @MockBean
     private lateinit var todaysPriceFetcher: TodaysPriceFetcher
 
-    private val sampleTodaysPrices: List<TodaysPriceEntry> = Arrays.asList(
-            TodaysPriceEntry(
+    private val sampleTodaysPrices: List<TodaysPrice> = Arrays.asList(
+            TodaysPrice(
+                    date = LocalDate.parse("2017-10-31"),
                     companyName = "Khanikhola Hydropower Co. Ltd.",
                     noOfTransactions = 14,
                     maxPrice = BigDecimal("154.00"),
@@ -38,9 +41,12 @@ class TodaysPriceControllerTest {
                     tradedShares = BigDecimal("362.00").toInt(),
                     amount = BigDecimal("54958.00"),
                     previousClosing = BigDecimal("154.00"),
-                    difference = BigDecimal("-3.00")),
+                    difference = BigDecimal("-3.00"),
+                    valueDate = LocalDate.parse("2017-10-31"),
+                    valueTime = LocalTime.parse("15:00:00")),
 
-            TodaysPriceEntry(
+            TodaysPrice(
+                    date = LocalDate.parse("2017-10-31"),
                     companyName = "World Merchant Banking & Finance Ltd.",
                     noOfTransactions = 13,
                     maxPrice = BigDecimal("144.00"),
@@ -49,12 +55,14 @@ class TodaysPriceControllerTest {
                     tradedShares = BigDecimal("2466.00").toInt(),
                     amount = BigDecimal("350748.00"),
                     previousClosing = BigDecimal("144.00"),
-                    difference = BigDecimal("-2.00"))
+                    difference = BigDecimal("-2.00"),
+                    valueDate = LocalDate.parse("2017-10-31"),
+                    valueTime = LocalTime.parse("15:00:00"))
     )
 
     @Test
     fun getTodaysPriceShouldReturnTodaysPricesJson() {
-        given(todaysPriceFetcher.getTodaysPrice())
+        given(todaysPriceFetcher.getTodaysPrices())
                 .willReturn(sampleTodaysPrices)
 
         mvc.perform(get("/data/todaysprice"))

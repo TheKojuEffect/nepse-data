@@ -18,7 +18,7 @@ class TodaysPriceControllerIntTest {
 
     @Test
     fun testGetTodaysPrice() {
-        val prices = template!!.getForObject("/data/todaysprice", List::class.java)
+        val prices = template.getForObject("/data/todaysprice", List::class.java)
         assertThat(prices)
                 .isNotEmpty
     }
