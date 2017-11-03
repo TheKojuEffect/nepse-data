@@ -26,9 +26,11 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect")
     compile("org.jsoup:jsoup:1.10.3")
 
-    runtime("com.h2database:h2")
+    runtime("org.postgresql:postgresql")
+    runtime("org.liquibase:liquibase-core")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testRuntime("com.h2database:h2")
 }
 
 repositories {
