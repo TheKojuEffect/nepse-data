@@ -13,6 +13,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+springBoot {
+    isExecutable = true
+}
+
 ext {
     set("hibernate.version", "5.2.12.Final")
 }
