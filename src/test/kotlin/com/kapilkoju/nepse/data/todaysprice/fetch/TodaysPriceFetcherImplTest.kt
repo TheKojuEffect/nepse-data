@@ -1,6 +1,6 @@
 package com.kapilkoju.nepse.data.todaysprice.fetch
 
-import com.kapilkoju.nepse.data.todaysprice.model.TodaysPriceEntry
+import com.kapilkoju.nepse.data.todaysprice.model.TodaysPrice
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,6 +14,8 @@ import org.springframework.test.web.client.MockRestServiceServer
 import org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo
 import org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess
 import java.math.BigDecimal
+import java.time.LocalDate
+import java.time.LocalTime
 
 @RunWith(SpringRunner::class)
 @RestClientTest(TodaysPriceFetcherImpl::class)
@@ -28,61 +30,74 @@ class TodaysPriceFetcherImplTest {
     @Value("\${nepse.todaysprice.url}")
     private lateinit var todaysPriceUrl: String
 
-    @Value("classpath:data/todaysprice-2017-09-17.xls")
-    private lateinit var todaysPriceXls: Resource
+    @Value("classpath:data/todaysprice-2017-10-31-15:48.html")
+    private lateinit var todaysPriceHtml: Resource
 
     @Test
     fun getTodaysPricesShouldReturnListOfTodaysPrices() {
         server.expect(requestTo(todaysPriceUrl))
-                .andRespond(withSuccess(todaysPriceXls, MediaType.valueOf("application/vnd.ms-excel")))
+                .andRespond(withSuccess(todaysPriceHtml, MediaType.TEXT_HTML))
 
-        val prices = todaysPriceFetcher.getTodaysPrice()
+        val prices = todaysPriceFetcher.getTodaysPrices()
         assertThat(prices)
-                .hasSize(159)
+                .hasSize(160)
                 .contains(
-                        TodaysPriceEntry(
+
+                        TodaysPrice(
+                                date = LocalDate.now(),
                                 companyName = "Agriculture Development Bank Limited",
-                                noOfTransactions = 159,
-                                maxPrice = BigDecimal("459.00"),
-                                minPrice = BigDecimal("438.00"),
-                                closingPrice = BigDecimal("447.00"),
-                                tradedShares = BigDecimal("49764.00").toInt(),
-                                amount = BigDecimal("22001355.00"),
-                                previousClosing = BigDecimal("447.00"),
-                                difference = BigDecimal("0.00")),
+                                noOfTransactions = 38,
+                                maxPrice = BigDecimal("440.00"),
+                                minPrice = BigDecimal("433.00"),
+                                closingPrice = BigDecimal("437.00"),
+                                tradedShares = BigDecimal("8889.00").toInt(),
+                                amount = BigDecimal("3866223.00"),
+                                previousClosing = BigDecimal("437.00"),
+                                difference = BigDecimal("0.00"),
+                                valueDate = LocalDate.parse("2017-10-31"),
+                                valueTime = LocalTime.parse("15:00:00")),
 
-                        TodaysPriceEntry(
+                        TodaysPrice(
+                                date = LocalDate.now(),
                                 companyName = "Everest Insurance Co. Ltd.",
-                                noOfTransactions = 34,
-                                maxPrice = BigDecimal("2698.00"),
-                                minPrice = BigDecimal("2652.00"),
-                                closingPrice = BigDecimal("2685.00"),
-                                tradedShares = BigDecimal("1500.00").toInt(),
-                                amount = BigDecimal("4025360.00"),
-                                previousClosing = BigDecimal("2650.00"),
-                                difference = BigDecimal("35.00")),
+                                noOfTransactions = 1,
+                                maxPrice = BigDecimal("2635.00"),
+                                minPrice = BigDecimal("2635.00"),
+                                closingPrice = BigDecimal("2635.00"),
+                                tradedShares = BigDecimal("10.00").toInt(),
+                                amount = BigDecimal("26350.00"),
+                                previousClosing = BigDecimal("2635.00"),
+                                difference = BigDecimal("0.00"),
+                                valueDate = LocalDate.parse("2017-10-31"),
+                                valueTime = LocalTime.parse("15:00:00")),
 
-                        TodaysPriceEntry(
+                        TodaysPrice(
+                                date = LocalDate.now(),
                                 companyName = "Khanikhola Hydropower Co. Ltd.",
-                                noOfTransactions = 13,
-                                maxPrice = BigDecimal("154.00"),
-                                minPrice = BigDecimal("151.00"),
-                                closingPrice = BigDecimal("151.00"),
-                                tradedShares = BigDecimal("362.00").toInt(),
-                                amount = BigDecimal("54958.00"),
-                                previousClosing = BigDecimal("154.00"),
-                                difference = BigDecimal("-3.00")),
+                                noOfTransactions = 12,
+                                maxPrice = BigDecimal("168.00"),
+                                minPrice = BigDecimal("161.00"),
+                                closingPrice = BigDecimal("161.00"),
+                                tradedShares = BigDecimal("154.00").toInt(),
+                                amount = BigDecimal("25352.00"),
+                                previousClosing = BigDecimal("167.00"),
+                                difference = BigDecimal("-6.00"),
+                                valueDate = LocalDate.parse("2017-10-31"),
+                                valueTime = LocalTime.parse("15:00:00")),
 
-                        TodaysPriceEntry(
+                        TodaysPrice(
+                                date = LocalDate.now(),
                                 companyName = "World Merchant Banking & Finance Ltd.",
-                                noOfTransactions = 13,
-                                maxPrice = BigDecimal("144.00"),
-                                minPrice = BigDecimal("140.00"),
-                                closingPrice = BigDecimal("142.00"),
-                                tradedShares = BigDecimal("2466.00").toInt(),
-                                amount = BigDecimal("350748.00"),
-                                previousClosing = BigDecimal("144.00"),
-                                difference = BigDecimal("-2.00"))
+                                noOfTransactions = 3,
+                                maxPrice = BigDecimal("138.00"),
+                                minPrice = BigDecimal("136.00"),
+                                closingPrice = BigDecimal("138.00"),
+                                tradedShares = BigDecimal("1500.00").toInt(),
+                                amount = BigDecimal("206000.00"),
+                                previousClosing = BigDecimal("138.00"),
+                                difference = BigDecimal("0.00"),
+                                valueDate = LocalDate.parse("2017-10-31"),
+                                valueTime = LocalTime.parse("15:00:00"))
                 )
 
     }

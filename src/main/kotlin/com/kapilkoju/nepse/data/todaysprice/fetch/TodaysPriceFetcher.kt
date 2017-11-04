@@ -1,8 +1,8 @@
 package com.kapilkoju.nepse.data.todaysprice.fetch
 
-import com.kapilkoju.nepse.data.todaysprice.model.TodaysPriceEntry
+import com.kapilkoju.nepse.data.todaysprice.model.TodaysPrice
 
 interface TodaysPriceFetcher {
 
-    fun getTodaysPrice(): List<TodaysPriceEntry>
+    fun getTodaysPrices(): List<TodaysPrice>
 }
