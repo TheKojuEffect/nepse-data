@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.kapilkoju"
-version = "0.0.1-SNAPSHOT"
+version = "17.11.04"
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
