@@ -17,4 +17,10 @@
                  path="floor_sheet_table.sql"
                  relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet id="3" author="kplx2.0@gmail.com">
+        <sqlFile dbms="postgresql"
+                 path="stock_live_table.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
