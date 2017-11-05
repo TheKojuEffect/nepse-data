@@ -27,7 +27,7 @@ class FloorSheetDumper(private val jobBuilderFactory: JobBuilderFactory,
                        private val floorSheetFetcher: FloorSheetFetcher,
                        private val floorSheetRepo: FloorSheetRepo) {
 
-    @Scheduled(cron = "0 20 15 * * SUN-FRI")
+    @Scheduled(cron = "0 25 16 * * SUN-FRI")
     fun schedule() {
         val now = LocalDateTime.now().toString()
         val param = JobParametersBuilder().addString("now", now).toJobParameters()
