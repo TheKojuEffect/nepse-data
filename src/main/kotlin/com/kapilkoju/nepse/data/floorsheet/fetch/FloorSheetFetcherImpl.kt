@@ -1,6 +1,6 @@
 package com.kapilkoju.nepse.data.floorsheet.fetch
 
-import com.kapilkoju.nepse.data.floorsheet.model.FloorSheetEntry
+import com.kapilkoju.nepse.data.floorsheet.model.FloorSheet
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.springframework.beans.factory.annotation.Value
@@ -18,7 +18,7 @@ class FloorSheetFetcherImpl(
 
     private val restTemplate: RestTemplate = restTemplateBuilder.build()
 
-    override fun getFloorSheet(): List<FloorSheetEntry> {
+    override fun getFloorSheets(): List<FloorSheet> {
         val floorSheetHtml = restTemplate.getForObject(floorSheetUrl, String::class.java)
 
         val floorSheetTable = Jsoup.parse(floorSheetHtml)
@@ -27,11 +27,11 @@ class FloorSheetFetcherImpl(
 
         val floorSheetExtractor = { tr: Element ->
             val tds = tr.select("td")
-            FloorSheetEntry(
+            FloorSheet(
                     contractNo = tds[1].text().toLong(),
                     stockSymbol = tds[2].text(),
-                    buyerBroker = Integer.valueOf(tds[3].text()),
-                    sellerBroker = Integer.valueOf(tds[4].text()),
+                    buyerBroker = tds[3].text(),
+                    sellerBroker = tds[4].text(),
                     quantity = Integer.valueOf(tds[5].text()),
                     rate = BigDecimal(tds[6].text()),
                     amount = BigDecimal(tds[7].text()))

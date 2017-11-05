@@ -11,9 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(
-        webEnvironment = WebEnvironment.RANDOM_PORT,
-        properties = arrayOf("nepse.floorsheet.url=http://www.nepalstock.com/floorsheet?_limit=9"))
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class FloorSheetControllerIntTest {
 
     @Autowired

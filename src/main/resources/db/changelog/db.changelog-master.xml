@@ -11,4 +11,10 @@
                  path="todays_price_table.sql"
                  relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet id="2" author="kplx2.0@gmail.com">
+        <sqlFile dbms="postgresql"
+                 path="floor_sheet_table.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>

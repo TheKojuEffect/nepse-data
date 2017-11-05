@@ -1,6 +1,6 @@
 package com.kapilkoju.nepse.data.floorsheet.fetch
 
-import com.kapilkoju.nepse.data.floorsheet.model.FloorSheetEntry
+import com.kapilkoju.nepse.data.floorsheet.model.FloorSheet
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,42 +36,42 @@ class FloorSheetFetcherImplTest {
         server.expect(requestTo(floorSheetUrl))
                 .andRespond(withSuccess(floorSheetHtml, MediaType.TEXT_HTML))
 
-        val prices = floorSheetFetcher.getFloorSheet()
+        val prices = floorSheetFetcher.getFloorSheets()
         assertThat(prices)
                 .hasSize(50)
                 .contains(
-                        FloorSheetEntry(
+                        FloorSheet(
                                 contractNo = 201709175342179L,
                                 stockSymbol = "PRVU",
-                                buyerBroker = 45,
-                                sellerBroker = 41,
+                                buyerBroker = "45",
+                                sellerBroker = "41",
                                 quantity = 50,
                                 rate = BigDecimal("376"),
                                 amount = BigDecimal("18800.00")),
 
-                        FloorSheetEntry(
+                        FloorSheet(
                                 contractNo = 201709175342182L,
                                 stockSymbol = "NGPL",
-                                buyerBroker = 29,
-                                sellerBroker = 1,
+                                buyerBroker = "29",
+                                sellerBroker = "1",
                                 quantity = 10,
                                 rate = BigDecimal("237"),
                                 amount = BigDecimal("2370.00")),
 
-                        FloorSheetEntry(
+                        FloorSheet(
                                 contractNo = 201709175342221L,
                                 stockSymbol = "NBBL",
-                                buyerBroker = 58,
-                                sellerBroker = 18,
+                                buyerBroker = "58",
+                                sellerBroker = "18",
                                 quantity = 10,
                                 rate = BigDecimal("3820"),
                                 amount = BigDecimal("38200.00")),
 
-                        FloorSheetEntry(
+                        FloorSheet(
                                 contractNo = 201709175342228L,
                                 stockSymbol = "LBL",
-                                buyerBroker = 47,
-                                sellerBroker = 43,
+                                buyerBroker = "47",
+                                sellerBroker = "43",
                                 quantity = 100,
                                 rate = BigDecimal("339"),
                                 amount = BigDecimal("33900.00"))

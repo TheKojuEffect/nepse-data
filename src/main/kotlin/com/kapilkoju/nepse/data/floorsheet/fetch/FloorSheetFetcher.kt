@@ -1,8 +1,8 @@
 package com.kapilkoju.nepse.data.floorsheet.fetch
 
-import com.kapilkoju.nepse.data.floorsheet.model.FloorSheetEntry
+import com.kapilkoju.nepse.data.floorsheet.model.FloorSheet
 
 interface FloorSheetFetcher {
 
-    fun getFloorSheet(): List<FloorSheetEntry>
+    fun getFloorSheets(): List<FloorSheet>
 }
