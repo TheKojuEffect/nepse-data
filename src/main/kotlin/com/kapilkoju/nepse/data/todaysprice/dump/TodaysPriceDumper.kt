@@ -27,7 +27,7 @@ class TodaysPriceDumper(private val jobBuilderFactory: JobBuilderFactory,
                         private val todaysPriceFetcher: TodaysPriceFetcher,
                         private val todaysPriceRepo: TodaysPriceRepo) {
 
-    @Scheduled(cron = "0 15 16 * * SUN-FRI")
+    @Scheduled(cron = "0 15 16 * * SUN-THU")
     fun schedule() {
         val today = LocalDate.now().toString()
         val param = JobParametersBuilder().addString("today", today).toJobParameters()

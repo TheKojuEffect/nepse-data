@@ -26,7 +26,7 @@ class StockLiveDumper(private val jobBuilderFactory: JobBuilderFactory,
                       private val stockLiveFetcher: StockLiveFetcher,
                       private val stockLiveRepo: StockLiveRepo) {
 
-    @Scheduled(cron = "25,55 * 11-14 * * SUN-FRI")
+    @Scheduled(cron = "26,56 * 11-14 * * SUN-THU")
     fun schedule() {
         val now = LocalDateTime.now().toString()
         val param = JobParametersBuilder().addString("now", now).toJobParameters()
